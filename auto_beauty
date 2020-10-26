@@ -1,7 +1,7 @@
 ###########################################
 #autoBeauty.py
 #Version 1.0.6
-#Last updated October 25 2020
+#Last updated October 26 2020
 #This module allow to import multi passes render from the render engine Cycle
 #and Redshift, let the user choose between an additive or a substractive assembly
 #and finally reconstruct automaticaly the beauty. There are also denoise and sharpen
