@@ -1,9 +1,9 @@
 ###########################################
 #autoBeauty.py
-#Version 1.3.01
-#Last updated June 20 2021
+#Version 1.3.02
+#Last updated August 08 2021
 #
-#Decompose the code into sub modules to make it more readable
+#Simplify the id count of the class.
 #
 #This module allow you to import multi passes render from the render engine Cycle
 #and Redshift, let the user choose between an additive or a substractive assembly
@@ -54,41 +54,23 @@ def user_choices():
         return
 
     else:
-        highest_index = 0
-        current_index = 0
-
-        for node in nuke.allNodes():
-            if re.search("AUTO_BEAUTY_", node["name"].value()):
-                current_index_lst = re.findall("[0-90-9]", node["name"].value())
-
-                if len(current_index_lst) <= 1:
-                    current_index = int(current_index_lst[1])
-                else:
-                    current_index = int(current_index_lst[0]+current_index_lst[1])
-
-                if current_index > highest_index:
-                    highest_index = current_index
-            else:
-                pass
-
-        new_index = highest_index + 1
-        if new_index <= 9:
-            new_index = str(0) + str(new_index)
-        else:
-            new_index = str(new_index)
-        #object autobeauty creation
-        node_autobeauty = Autobeauty(new_index, path_file, render_choice, assembly_choice)
+        node_autobeauty = Autobeauty(path_file, render_choice, assembly_choice)
 
 
 class Autobeauty:
+    id = 0
 
-    def __init__(self, new_index, path_file, render_choice, assembly_choice):
-        self.new_index = new_index
+    def __init__(self, path_file, render_choice, assembly_choice):
+        Autobeauty.id += 1
+        if Autobeauty.id < 10:
+            self.new_index  = str(0) + str(Autobeauty.id)
+        else:
+            self.new_index = str(Autobeauty.id)
         self.path_file = path_file
         self.render_choice = render_choice
         self.assembly_choice = assembly_choice
-        self.my_group = nuke.nodes.Group(name= "AUTO_BEAUTY_"+new_index+"_"+render_choice\
-        +"_"+assembly_choice, note_font= "Bahnschrift SemiLight")
+        self.my_group = nuke.nodes.Group(name= "AUTO_BEAUTY_"+str(self.new_index)+"_"+str(self.render_choice)\
+        +"_"+str(self.assembly_choice), note_font= "Bahnschrift SemiLight")
         self.read_file = None
         self.channels_to_assembly = None
 
@@ -183,7 +165,7 @@ class Autobeauty:
         ##################################################################
         #::::::::::::::::::::::::::KNOB CHANGED::::::::::::::::::::::::::#
         ##################################################################
-        nuke.toNode("AUTO_BEAUTY_"+new_index+"_"+render_choice+"_"+assembly_choice).knob("knobChanged").setValue("autoBeauty_v1_3_01.visibility()")
+        nuke.toNode("AUTO_BEAUTY_"+str(self.new_index)+"_"+render_choice+"_"+assembly_choice).knob("knobChanged").setValue("autoBeauty_v1_3_02.visibility()")
 
 def visibility():
     ###########################################################################################################
@@ -205,10 +187,9 @@ def visibility():
         assembly_choice = "Substractive"
     pass_select = x["par_pass_select_denoise"].value()
 
-    #re.search("AUTO_BEAUTY_", x["name"].value())
     current_index_lst = re.findall("[0-90-9]", x["name"].value())
     index = current_index_lst[0]+current_index_lst[1]
-    #index = x["name"].value()[12]
+
 
     #Denoise options.
     if x["par_onOff_den_"+render_choice+"_"+assembly_choice+"_"+str(index)+"_"+pass_select].value() == True:
@@ -313,7 +294,7 @@ def analyze_noise_execution():
     n = nuke.toNode("Denoise "+pass_select)
     n.knob("analyze").execute()
     n.hideControlPanel()
-    nuke.show(nuke.toNode("AUTO_BEAUTY_"+render_choice+"_"+assembly_choice))
+    nuke.show(nuke.toNode("AUTO_BEAUTY_"+str(self.new_index)+"_"+render_choice+"_"+assembly_choice))
 
 def render():
     ####################################################################
@@ -333,7 +314,6 @@ def render():
     elif "Substractive" in z["name"].value():
         assembly_choice = "Substractive"
 
-    #index = z["name"].value()[12]
     current_index_lst = re.findall("[0-90-9]", z["name"].value())
     index = current_index_lst[0]+current_index_lst[1]
 
