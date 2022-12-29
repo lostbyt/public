@@ -6,3 +6,5 @@ Some python programs developped for post production:
 The tool automates all the process, the user has just to plug his rotos and setup the movment he wants.
 
 -Reads cleaner: This is a tool I wrote to help organize the reads node in a nuke script. You can order them by ascending/ descending frame range lenght or by name.
+
+-ReadGeo renamer: I like to import in Nuke software my 3D geometry in separate readgeo nodes, I feel it is more convenient and flexible to manage your projections. Renaming each nodes can be tedious. Thoses few lines of code will do it for you, with the same name used in your 3D package.
