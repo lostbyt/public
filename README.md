@@ -1,4 +1,4 @@
-Some python programs developped for post production:
+Some python programs I developped for post production:
 
 -Auto beauty: This tool for Nuke software, will allow the user to import a multi render pass from Cycle(Blender) or Redshift and reconstruct to match the beauty. Some options like denoise, sharpen, and grade are directly implemented in the menu.
 
