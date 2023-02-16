@@ -1,5 +1,7 @@
 Some programs I developped for post production and my IoT studies:
 
+-T06_systeme_HVAC_v04: Program to regulate the temperature of a HVAC system
+
 -Auto beauty: This tool for Nuke software, will allow the user to import a multi render pass from Cycle(Blender) or Redshift and reconstruct to match the beauty. Some options like denoise, sharpen, and grade are directly implemented in the menu.
 
 -Fake parallax: This tool for Nuke software is based on a Alexander Hanneman tutorial (https://www.youtube.com/watch?v=avtDQcZNThI), it allows to quickly create a "push in zoom" with parallax even with 2D elements. It uses a uv distortion map.
