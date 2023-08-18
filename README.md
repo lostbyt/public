@@ -1,8 +1,10 @@
-Some programs I developped for post production and my IoT studies:
+Some code I developped in professional and studies environment:
 
--T06_systeme_HVAC_v04: Program to regulate the temperature of a HVAC system
+-T06_systeme_HVAC_v04: Program to regulate the temperature of a HVAC system.
 
 -Auto beauty: This tool for Nuke software, will allow the user to import a multi render pass from Cycle(Blender) or Redshift and reconstruct to match the beauty. Some options like denoise, sharpen, and grade are directly implemented in the menu.
+
+-CreditCardChecker: a program who determines if a credit card is valid or not.
 
 -Fake parallax: This tool for Nuke software is based on a Alexander Hanneman tutorial (https://www.youtube.com/watch?v=avtDQcZNThI), it allows to quickly create a "push in zoom" with parallax even with 2D elements. It uses a uv distortion map.
 The tool automates all the process, the user has just to plug his rotos and setup the movment he wants.
